@@ -225,6 +225,44 @@ enum MathExpr {
 
 ---
 
+## GitHub Workflow — Issues como Fonte de Verdade
+
+As User Stories deste projecto vivem como **GitHub Issues** no repo `DbonesDev/mathscribe`, sincronizadas com o **GitHub Project** "Arcasidian Roadmap".
+
+### Antes de começar a trabalhar
+
+```bash
+# Ver todas as US abertas deste repo, ordenadas por sprint
+gh issue list --repo DbonesDev/mathscribe --label user-story --state open --json number,title,labels --jq '.[] | "\(.number)\t\(.title)\t\(.labels | map(.name) | join(","))"'
+
+# Ver detalhes de uma US específica
+gh issue view <number> --repo DbonesDev/mathscribe
+```
+
+**Regra:** Sempre consultar as issues abertas antes de iniciar trabalho. Respeitar a ordem de sprint e dependências descritas no corpo da issue.
+
+### Durante o desenvolvimento
+
+- Criar branch `feature/US-MS-<ID>-<descrição>` a partir da issue
+- Seguir o checklist DDI que está no corpo de cada issue
+- Referenciar a issue nos commits: `feat: US-MS-001 repo + ADR (#<number>)`
+
+### Ao concluir uma US
+
+```bash
+# Fechar a issue quando todos os critérios DDI estiverem cumpridos
+gh issue close <number> --repo DbonesDev/mathscribe --comment "✅ DDI completo: testes passam, code review feito, docs actualizados."
+```
+
+### Ver roadmap completo (todos os repos)
+
+```bash
+# Listar todas as issues do projecto Arcasidian Roadmap
+gh project item-list --owner @me --format json | head -50
+```
+
+---
+
 ## Workflow de Desenvolvimento: DDI
 
 Este projecto usa **Desenvolvimento Dirigido por Intenção (DDI)**. O ciclo é:
