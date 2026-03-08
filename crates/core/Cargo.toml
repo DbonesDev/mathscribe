@@ -1,0 +1,15 @@
+[package]
+name = "mathscribe-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "NL→formula engine: converts natural language (PT/EN/ES) to mathematical formulas"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+unicode-segmentation = "1"
+
+[dev-dependencies]
+pretty_assertions = "1"
